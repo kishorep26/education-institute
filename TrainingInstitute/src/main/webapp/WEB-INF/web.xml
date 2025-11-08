@@ -1,0 +1,27 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<servlet>
+		<servlet-name>GetInstituteCookie</servlet-name>
+		<display-name>GetInstituteCookie</display-name>
+		<description></description>
+		<servlet-class>com.nttdatacasestudy.servlet.GetInstituteCooky</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SetInstituteCookie</servlet-name>
+		<display-name>SetInstituteCookie</display-name>
+		<description></description>
+		<servlet-class>com.nttdatacasestudy.servlet.SetInstituteCookie</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetInstituteCookie</servlet-name>
+		<url-pattern>/GetInstituteCookie</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SetInstituteCookie</servlet-name>
+		<url-pattern>/SetInstituteCookie</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
