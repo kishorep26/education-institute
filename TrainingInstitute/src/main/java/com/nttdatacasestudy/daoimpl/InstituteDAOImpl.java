@@ -16,19 +16,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *InstituteDAOImpl  class for InstituteDAO interface.
+ * InstituteDAOImpl class for InstituteDAO interface.
  *
  * @author TrainingInstitute
  * @since 2021-10-08
  * @version 1.2
  */
 
-
 public class InstituteDAOImpl implements InstituteDAO {
   private static final Logger LOGGER = LoggerFactory.getLogger(InstituteDAO.class);
 
   @Override
-public boolean addNewInstitution(Institute institute) throws DAOException {
+  public boolean addNewInstitution(Institute institute) throws DAOException {
     LOGGER.trace("Executing addNewInstitution");
     boolean b = false;
 
@@ -49,7 +48,7 @@ public boolean addNewInstitution(Institute institute) throws DAOException {
 
         LOGGER.info("New Institution added successfully");
         b = true;
-      } 
+      }
     } catch (SQLIntegrityConstraintViolationException e) {
       LOGGER.error("Presense Of Duplicate Entry!");
       System.out.println("Duplicate Entry. Institute Already Exsists!");
@@ -61,7 +60,7 @@ public boolean addNewInstitution(Institute institute) throws DAOException {
   }
 
   @Override
-public boolean validateInstituteForLogin(Institute institute) throws DAOException {
+  public boolean validateInstituteForLogin(Institute institute) throws DAOException {
     LOGGER.trace("Executing validateInstituteForLogin");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -69,12 +68,12 @@ public boolean validateInstituteForLogin(Institute institute) throws DAOExceptio
       PreparedStatement pst = null;
       if (institute.getInstituteID() != -1) {
         pst = con.prepareStatement(
-        "select * from institute " + "where instituteID = ? and " + "institutePassword = ?");
+            "select * from institute " + "where instituteID = ? and " + "institutePassword = ?");
         pst.setInt(1, institute.getInstituteID());
         pst.setString(2, institute.getInstitutePassword());
       }
       ResultSet rs = pst.executeQuery();
-      if (rs.isBeforeFirst()) { // record was found
+      if (rs.next()) { // record was found
 
         LOGGER.warn("Institute Credentials Verified!");
         b = true;
@@ -97,24 +96,27 @@ public List<Institute> viewAllInstitutesUsingMapperClass() throws DAOException {
       PreparedStatement pst = con.prepareStatement("select * from institute");
       ResultSet rs = pst.executeQuery();
       InstituteRecordMapperImpl mapper = new InstituteRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) { 
         LOGGER.info("Displaying Institute Details");
-        while (rs.next()) {
+        do {
           Institute institute = mapper.mapInstituteRecord(rs);
           lstInstitute.add(institute);
-        }
+        } while (rs.next());
+      }
       } else { 
         LOGGER.info("No Records in institution table");
       }
-    } catch (SQLException e) {
-      LOGGER.error(e.getMessage());
-      System.out.println("ERROR! Check Logs");
-    }
-    return lstInstitute;
+    }catch(
+
+  SQLException e)
+  {
+    LOGGER.error(e.getMessage());
+    System.out.println("ERROR! Check Logs");
+  }return lstInstitute;
   }
 
   @Override
-public boolean deleteInstitute(int instituteID) throws DAOException {
+  public boolean deleteInstitute(int instituteID) throws DAOException {
     LOGGER.trace("Excuting deleteInstitute");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -125,10 +127,10 @@ public boolean deleteInstitute(int instituteID) throws DAOException {
 
       int count = pst.executeUpdate();
 
-      if (count > 0) { 
+      if (count > 0) {
         LOGGER.info("Institute is deleted");
         b = true;
-      } else { 
+      } else {
         LOGGER.warn("Institute not deleted or not found");
       }
 
@@ -140,7 +142,7 @@ public boolean deleteInstitute(int instituteID) throws DAOException {
   }
 
   @Override
-public boolean updateInstituteRecord(Institute institute) throws DAOException {
+  public boolean updateInstituteRecord(Institute institute) throws DAOException {
     LOGGER.trace("Executing updateInstituteRecord");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -154,10 +156,10 @@ public boolean updateInstituteRecord(Institute institute) throws DAOException {
       pst.setInt(5, institute.getInstituteID());
       int count = pst.executeUpdate();
 
-      if (count > 0) { 
+      if (count > 0) {
         LOGGER.info("Institution Details Updated");
         b = true;
-      } else {         
+      } else {
         LOGGER.warn("Failed to Update Institution");
       }
     } catch (SQLException e) {
@@ -175,20 +177,23 @@ public List<Institute> viewInstituteProfile(int instituteid) throws DAOException
       pst.setInt(1, instituteid);
       ResultSet rs = pst.executeQuery();
       InstituteRecordMapperImpl mapper = new InstituteRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) { 
         LOGGER.info("Displaying Institute Details");
-        while (rs.next()) {
+        do {
           Institute institute = mapper.mapInstituteRecord(rs);
           lstInstitute.add(institute);
-        }
+        } while (rs.next());
+      }
       } else { 
         LOGGER.info("No Records in institution table");
       }
-    } catch (SQLException e) {
+    }catch(
+
+  SQLException e)
+  {
       LOGGER.error(e.getMessage());
       System.out.println("ERROR! Check Logs");
-    }
-    return lstInstitute;
-  }
+    }return lstInstitute;
+}
 
 }

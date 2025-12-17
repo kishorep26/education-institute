@@ -29,7 +29,7 @@ public class AdmissionRequestDAOImpl implements AdmissionRequestDAO {
   private static final Logger LOGGER = LoggerFactory.getLogger(AdmissionRequestDAO.class);
 
   @Override
-public boolean addNewAdmissionRequest(AdmissionRequest admissionrequest) throws DAOException {
+  public boolean addNewAdmissionRequest(AdmissionRequest admissionrequest) throws DAOException {
     LOGGER.trace("executing addNewAdmissionRequest");
     boolean b = false;
 
@@ -37,7 +37,7 @@ public boolean addNewAdmissionRequest(AdmissionRequest admissionrequest) throws 
 
       PreparedStatement pst = con.prepareStatement(
           "insert into admissionrequest" + "(userID,courseID,requestDate)"
-          + " values(?,?,?)");
+              + " values(?,?,?)");
       pst.setString(1, admissionrequest.getUserID());
       pst.setInt(2, admissionrequest.getCourseID());
       pst.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
@@ -59,7 +59,7 @@ public boolean addNewAdmissionRequest(AdmissionRequest admissionrequest) throws 
   }
 
   @Override
-public boolean updateAdmissionRequestStatus(String userID, boolean status) throws DAOException {
+  public boolean updateAdmissionRequestStatus(String userID, boolean status) throws DAOException {
     LOGGER.trace("Executing updateAdmissionRequestStatus");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -91,7 +91,7 @@ public boolean updateAdmissionRequestStatus(String userID, boolean status) throw
   }
 
   @Override
-public List<RequestNResponse> mapViewResponseRecord(String userID) throws DAOException {
+  public List<RequestNResponse> mapViewResponseRecord(String userID) throws DAOException {
 
     List<RequestNResponse> lstreqres = new ArrayList<>();
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -104,15 +104,15 @@ public List<RequestNResponse> mapViewResponseRecord(String userID) throws DAOExc
       pst.setString(1, userID);
 
       ResultSet rs = pst.executeQuery();
-      
+
       AdmissionRequestMapperImpl mapper = new AdmissionRequestMapperImpl();
 
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Requests");
-        while (rs.next()) {
+        do {
           RequestNResponse displayresponse = mapper.mapRequestResponseRecord(rs);
           lstreqres.add(displayresponse);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records found for Admission request");
         System.out.println();
@@ -129,28 +129,26 @@ public List<RequestNResponse> mapViewResponseRecord(String userID) throws DAOExc
   }
 
   @Override
-public List<RequestNResponse> mapViewRequestRecord(int instituteID) throws DAOException {
+  public List<RequestNResponse> mapViewRequestRecord(int instituteID) throws DAOException {
     List<RequestNResponse> lstreqres = new ArrayList<>();
     try (Connection con = DbConnection.getDatabaseConnection()) {
 
       PreparedStatement pst = con
           .prepareStatement("select * from admissionrequest a, course c, student s, institute i "
-          + "where a.courseID = c.courseID and c.instituteID = i.instituteID "
-          + "and a.userID = s.userID and i.instituteID = ?");
+              + "where a.courseID = c.courseID and c.instituteID = i.instituteID "
+              + "and a.userID = s.userID and i.instituteID = ?");
 
       pst.setInt(1, instituteID);
 
       ResultSet rs = pst.executeQuery();
       AdmissionRequestMapperImpl mapper = new AdmissionRequestMapperImpl();
 
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Requests");
-        while (rs.next()) {
-
+        do {
           RequestNResponse reqres = mapper.mapRequestResponseRecord(rs);
           lstreqres.add(reqres);
-
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records found for Admission request");
         System.out.println();
@@ -167,7 +165,7 @@ public List<RequestNResponse> mapViewRequestRecord(int instituteID) throws DAOEx
   }
 
   @Override
-public boolean displayResponse(String userID) throws DAOException {
+  public boolean displayResponse(String userID) throws DAOException {
 
     LocalDate currentDate = LocalDate.now();
     String abc = " ";
@@ -180,11 +178,11 @@ public boolean displayResponse(String userID) throws DAOException {
           .prepareStatement("select status,requestdate from admissionrequest where userid = ? ");
       pst.setString(1, userID);
       ResultSet rs = pst.executeQuery();
-      if (rs.isBeforeFirst()) {
-        while (rs.next()) {
+      if (rs.next()) {
+        do {
           abc = rs.getDate("requestdate").toString();
           status = rs.getBoolean("status");
-        }
+        } while (rs.next());
       }
       LocalDate dateAfter = LocalDate.parse(abc);
       noOfDaysBetween = ChronoUnit.DAYS.between(dateAfter, currentDate);
@@ -194,7 +192,7 @@ public boolean displayResponse(String userID) throws DAOException {
     } catch (SQLException e) {
       LOGGER.error(e.getMessage());
       System.out.println("ERROR! Check Logs");
-    } 
+    }
     return b;
   }
 

@@ -14,7 +14,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * CourseDAOImpl class for CourseDAO interface.
  *
@@ -23,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.2
  */
 
-public class CourseDAOImpl implements CourseDAO{
+public class CourseDAOImpl implements CourseDAO {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CourseDAO.class);
 
@@ -61,7 +60,7 @@ public class CourseDAOImpl implements CourseDAO{
   }
 
   @Override
-public List<DisplayCourse> DisplayCourses() throws SQLException {
+  public List<DisplayCourse> DisplayCourses() throws SQLException {
 
     LOGGER.trace("Executing Display Course");
     List<DisplayCourse> lstcourse = new ArrayList<>();
@@ -70,12 +69,12 @@ public List<DisplayCourse> DisplayCourses() throws SQLException {
           + "where c.instituteid = i.instituteid ");
       ResultSet rs = pst.executeQuery();
       CourseRecordMapperImpl mapper = new CourseRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Students");
-        while (rs.next()) {
+        do {
           DisplayCourse course = mapper.mapDisplayCourseRecord(rs);
           lstcourse.add(course);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records in institution table");
       }

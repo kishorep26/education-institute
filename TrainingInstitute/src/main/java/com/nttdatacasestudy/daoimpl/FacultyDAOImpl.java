@@ -14,10 +14,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
 /**
- *FacultyDAOImpl  class for FacultyDAO interface.
+ * FacultyDAOImpl class for FacultyDAO interface.
  *
  * @author TrainingInstitute
  * @since 2021-10-08
@@ -28,7 +26,7 @@ public class FacultyDAOImpl implements FacultyDAO {
   private static final Logger LOGGER = LoggerFactory.getLogger(FacultyDAO.class);
 
   @Override
-public boolean addNewFaculty(Faculty faculty) throws DAOException {
+  public boolean addNewFaculty(Faculty faculty) throws DAOException {
     LOGGER.trace("Executing addNewFaculty");
     boolean b = false;
 
@@ -44,11 +42,11 @@ public boolean addNewFaculty(Faculty faculty) throws DAOException {
 
       if (count > 0) {
         LOGGER.info("New faculty Added successfully");
-        b = true;             
-      } else { 
+        b = true;
+      } else {
 
         LOGGER.warn("Adding faculty Failed");
-      } 
+      }
     } catch (SQLException e) {
       LOGGER.error(e.getMessage());
       System.out.println("ERROR! Check Logs");
@@ -57,25 +55,24 @@ public boolean addNewFaculty(Faculty faculty) throws DAOException {
     return b;
   }
 
-  
   @Override
   public List<Faculty> ViewFaculty(int instituteID) throws DAOException {
     List<Faculty> lstfaculty = new ArrayList<>();
     try (Connection con = DbConnection.getDatabaseConnection()) {
 
       PreparedStatement pst = con
-            .prepareStatement("select * from faculty f, institute i where "
-            + "f.instituteID = i.instituteID and i.instituteID = ?");
+          .prepareStatement("select * from faculty f, institute i where "
+              + "f.instituteID = i.instituteID and i.instituteID = ?");
 
       pst.setInt(1, instituteID);
       ResultSet rs = pst.executeQuery();
       FacultyMapperImpl mapper = new FacultyMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Faculty");
-        while (rs.next()) {
+        do {
           Faculty displayfaculty = mapper.ViewFacultyUsingMapper(rs);
           lstfaculty.add(displayfaculty);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records found for Faculty");
         System.out.println();

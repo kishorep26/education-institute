@@ -3,6 +3,7 @@ package com.nttdatacasestudy.connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 /**
  * Class DbConnection is created to database connection.
  *
@@ -14,18 +15,19 @@ import java.sql.SQLException;
 public class DbConnection {
 
   /**
-  * Method is created inside the class.
-  *
-  * @return - return values from a static method.
-  */
+   * Method is created inside the class.
+   *
+   * @return - return values from a static method.
+   */
   public static Connection getDatabaseConnection() {
     Connection con = null;
     try {
       Class.forName(DbDetails.DRIVER_NAME);
       con = DriverManager.getConnection(DbDetails.CONSTR, DbDetails.USER_NAME,
-            DbDetails.PASSWORD);
+          DbDetails.PASSWORD);
     } catch (ClassNotFoundException | SQLException ex) {
       ex.printStackTrace();
+      throw new RuntimeException("Failed to connect to database: " + ex.getMessage(), ex);
     }
     return con;
   }

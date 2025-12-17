@@ -90,12 +90,12 @@ public class StudentDAOImpl implements StudentDAO {
       PreparedStatement pst = con.prepareStatement("select * from student");
       ResultSet rs = pst.executeQuery();
       StudentRecordMapperImpl mapper = new StudentRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Students");
-        while (rs.next()) {
+        do {
           Student student = mapper.mapStudentRecord(rs);
           lstStudent.add(student);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records in institution table");
       }
@@ -145,12 +145,12 @@ public class StudentDAOImpl implements StudentDAO {
       pst.setInt(1, instituteid);
       ResultSet rs = pst.executeQuery();
       StudentRecordMapperImpl mapper = new StudentRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying Student Details");
-        while (rs.next()) {
+        do {
           Student student = mapper.mapStudentInsRecord(rs);
           lstStudent.add(student);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records in student table");
       }
@@ -169,12 +169,12 @@ public class StudentDAOImpl implements StudentDAO {
       pst.setString(1, userid);
       ResultSet rs = pst.executeQuery();
       StudentRecordMapperImpl mapper = new StudentRecordMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying Student Details");
-        while (rs.next()) {
+        do {
           Student student = mapper.mapStudentRecord(rs);
           lstStudent.add(student);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records in student table");
       }

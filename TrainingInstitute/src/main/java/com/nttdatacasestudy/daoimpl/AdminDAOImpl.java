@@ -19,12 +19,11 @@ import org.slf4j.LoggerFactory;
  * @version 1.2
  */
 
-
-public class AdminDAOImpl implements AdminDAO { 
+public class AdminDAOImpl implements AdminDAO {
   private static final Logger LOGGER = LoggerFactory.getLogger(AdminDAOImpl.class);
-  
+
   @Override
-public boolean validateAdminForLogin(Admin admin) throws DAOException {
+  public boolean validateAdminForLogin(Admin admin) throws DAOException {
     LOGGER.trace("Executing validateAdminForLogin");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -33,7 +32,7 @@ public boolean validateAdminForLogin(Admin admin) throws DAOException {
       if (admin.getAdminID() != null) {
         LOGGER.info("Admin Credentials Verified!");
         pst = con.prepareStatement("select * from Admin " + "where adminID = ? " + "and "
-        + "adminPassword = ?");
+            + "adminPassword = ?");
         pst.setString(1, admin.getAdminID());
         pst.setString(2, admin.getAdminPassword());
       } else {
@@ -42,10 +41,10 @@ public boolean validateAdminForLogin(Admin admin) throws DAOException {
 
       ResultSet rs = pst.executeQuery();
 
-      if (rs.isBeforeFirst()) { 
+      if (rs.next()) {
         b = true;
       }
-    } catch (SQLException e) { 
+    } catch (SQLException e) {
       LOGGER.error(e.getMessage());
       System.out.println("ERROR! Check Logs");
     }

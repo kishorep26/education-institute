@@ -15,9 +15,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
- *FacultyDAOImpl  class for FacultyDAO interface.
+ * FacultyDAOImpl class for FacultyDAO interface.
  *
  * @author TrainingInstitute
  * @since 2021-10-08
@@ -29,7 +28,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
   private static final Logger LOGGER = LoggerFactory.getLogger(FeedbackDAO.class);
 
   @Override
-public boolean addNewFeedback(Feedback feedback) throws DAOException {
+  public boolean addNewFeedback(Feedback feedback) throws DAOException {
     LOGGER.trace("Executing addNewFeedback");
     boolean b = false;
     try (Connection con = DbConnection.getDatabaseConnection()) {
@@ -43,15 +42,15 @@ public boolean addNewFeedback(Feedback feedback) throws DAOException {
 
       int count = pst.executeUpdate();
 
-      if (count > 0)  { 
+      if (count > 0) {
 
         LOGGER.info("Feedback is submitted");
         b = true;
-      } else  {
+      } else {
 
         LOGGER.warn("Feedback isn't submitted");
       }
-    } catch (SQLException e) { 
+    } catch (SQLException e) {
       LOGGER.error(e.getMessage());
       System.out.println("ERROR! Check Logs");
     }
@@ -60,24 +59,24 @@ public boolean addNewFeedback(Feedback feedback) throws DAOException {
   }
 
   @Override
-public List<DisplayFeedback> ViewAllFeedback() throws DAOException {
+  public List<DisplayFeedback> ViewAllFeedback() throws DAOException {
 
     List<DisplayFeedback> lstfeedback = new ArrayList<>();
     try (Connection con = DbConnection.getDatabaseConnection()) {
 
       PreparedStatement pst = con
           .prepareStatement("select * from feedback f, institute i, student s where "
-          + "f.userID = s.userID and f.instituteID = i.instituteID");
+              + "f.userID = s.userID and f.instituteID = i.instituteID");
 
       ResultSet rs = pst.executeQuery();
       FeedbackMapperImpl mapper = new FeedbackMapperImpl();
 
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Requests");
-        while (rs.next()) {
+        do {
           DisplayFeedback displayfeedback = mapper.ViewAllFeedbackUsingMapper(rs);
           lstfeedback.add(displayfeedback);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records found for Admission request");
         System.out.println();
@@ -94,23 +93,23 @@ public List<DisplayFeedback> ViewAllFeedback() throws DAOException {
   }
 
   @Override
-public List<DisplayFeedback> ViewFeedback(int instituteID) throws DAOException {
+  public List<DisplayFeedback> ViewFeedback(int instituteID) throws DAOException {
     List<DisplayFeedback> lstfeedback = new ArrayList<>();
     try (Connection con = DbConnection.getDatabaseConnection()) {
 
       PreparedStatement pst = con
           .prepareStatement("select * from feedback f, institute i where "
-          + "f.instituteID = i.instituteID and i.instituteID = ?");
+              + "f.instituteID = i.instituteID and i.instituteID = ?");
 
       pst.setInt(1, instituteID);
       ResultSet rs = pst.executeQuery();
       FeedbackMapperImpl mapper = new FeedbackMapperImpl();
-      if (rs.isBeforeFirst()) {
+      if (rs.next()) {
         LOGGER.info("Displaying All Requests");
-        while (rs.next()) {
+        do {
           DisplayFeedback displayfeedback = mapper.ViewFeedbackUsingMapper(rs);
           lstfeedback.add(displayfeedback);
-        }
+        } while (rs.next());
       } else {
         LOGGER.info("No Records found for Admission request");
         System.out.println();
