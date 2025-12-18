@@ -95,7 +95,4 @@ Located in `src/main/resources/logback.xml`:
 - Log file location
 - Console output settings
 
-
-## 🙏 Acknowledgments
-
 Built as part of NTT Data case study project.
