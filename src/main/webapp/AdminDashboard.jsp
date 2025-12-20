@@ -1,205 +1,244 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Admin Dashboard</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-  
-    <style>
-    body{
-        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("images/admin.jpeg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .card{
-        background-color: #DEB992;
-        width: 250px;
-        height: 220px;
-        color:#DEB992;
-        margin: 1em;
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 1.5em;
-        text-align: center;
-        cursor: pointer;
-        position: relative; 
-        flex-direction: column;
-    }
-    .card::before , .card::after{
-        content: '';
-        position: absolute;
-        background: #051622;
-        width: 100%;
-        height: 40%;
-        border-radius: 15px 15px 0 0;
-        transition: all .4s;
-        
-    }
-    .card::before{
-        top: 0;
-    }
-    .card:hover::before{
-        transform: translateY(-20px);
-    }
-    .card::after{
-        bottom: 10px;
-        height: 60%;
-        border-radius:  0 0 15px 15px ;
-        
-    }
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+    <!DOCTYPE html>
+    <html lang="en">
 
-    h2{
-        color: whitesmoke;
-        padding-bottom: 15px;
-        font-family: "Montserrat";
-        font-weight: 800;
-        font-size: 2.5rem;
-        letter-spacing: 1px;
-        text-shadow: 2px 2px 2px;
-    }
-    .icon{
-        width: 60px;
-        height: 60px;
-        background: #1BA098;
-        color: #DEB992;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        z-index: 1;
-    
-    }
-    .icon:hover .icon{
-        box-shadow: 0 0 10px;
-    }
-    .icon i{
-        font-size: 1.5em;
-    }
-    .card p{
-        margin: 0.7em 0;
-        font-size: 0.8em;
-        display: none;
-        opacity: 0;
-        transition: all .4s;
-        z-index: 1;
-    }
-        
-    .card:hover p{
-        color: whitesmoke;
-        display: block;
-        opacity: 1;
-        padding: 5px 5px;
-        font-family: "Ubuntu";
-        font-size: 0.78rem;
-    }
-    .card h4{
-        font-size: 1.5rem;
-        font-family: "Ubuntu";
-        font-weight: 300;
-        margin-top: 0.5em;
-        z-index: 1;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard - Meta University</title>
+        <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3976/3976625.png">
 
-    .card .btn{
-        background-color: #051622;
-        margin-top: 0.5em;
-        z-index: 1;
-        padding-bottom: 10px;
-    }
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+            rel="stylesheet">
 
-    .btn{
-        height: 50px; 
-        width: 120px;
-        border-radius: 15px;
-    }
-    
-    .btn a{
-        font-size: 1.2rem;
-        font-family: "Montserrat";
-        font-weight: 300;
-        color: whitesmoke;
-    }
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    .btn:hover{
-        box-shadow: inset 120px 0 0 0 #DEB992;
-        cursor: pointer;
-        /* transition-delay: 40ms; */
-    }
-    .btn a:hover{
-        color: #051622;
-    }
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .logout-button{
-        padding-top: 60px;
-    }
+        <style>
+            :root {
+                --primary-color: #1e3a8a;
+                --secondary-color: #0f172a;
+                --accent-color: #f59e0b;
+            }
 
-    .logout-button .btn:hover{
-        box-shadow: inset 120px 0 0 0 #4bbb4b;
-        cursor: pointer;
-    }
-    .logout-button .btn a:hover{
-        color: whitesmoke;
-    }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-    </style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+
+            .dashboard-container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .dashboard-header {
+                background: white;
+                border-radius: 20px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            }
+
+            .welcome-text {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.5rem;
+                color: var(--secondary-color);
+                margin-bottom: 0.5rem;
+            }
+
+            .admin-badge {
+                display: inline-block;
+                background: var(--accent-color);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 50px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .latin-subtitle {
+                font-style: italic;
+                color: #6b7280;
+                font-size: 1rem;
+            }
+
+            .dashboard-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .dashboard-card {
+                background: white;
+                border-radius: 20px;
+                padding: 2rem;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .dashboard-card:hover {
+                transform: translateY(-10px);
+                border-color: var(--secondary-color);
+                box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+            }
+
+            .card-icon {
+                width: 70px;
+                height: 70px;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 1.5rem;
+                font-size: 2rem;
+                color: white;
+            }
+
+            .card-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.5rem;
+                color: var(--secondary-color);
+                margin-bottom: 0.5rem;
+            }
+
+            .card-description {
+                color: #6b7280;
+                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .card-btn {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 12px;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                transition: all 0.3s ease;
+            }
+
+            .card-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3);
+                color: white;
+            }
+
+            .logout-section {
+                text-align: center;
+            }
+
+            .logout-btn {
+                background: linear-gradient(135deg, #dc2626, #b91c1c);
+                color: white;
+                border: none;
+                padding: 1rem 3rem;
+                border-radius: 12px;
+                font-weight: 600;
+                font-size: 1.1rem;
+                text-decoration: none;
+                display: inline-block;
+                transition: all 0.3s ease;
+            }
+
+            .logout-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+                color: white;
+            }
+
+            @media (max-width: 768px) {
+                .welcome-text {
+                    font-size: 2rem;
+                }
+
+                .dashboard-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
     </head>
-  <body>
-      <div class = "col-12 container text-center">
-          <h2>Welcome <%out.print(session.getAttribute("adminid")); %>!</h2>
-        <div class="container text-center d-flex justify-content-center">
-        <br>
-            <div class="row d-flex justify-content-center">
-                <div class="card border-0">
-                    <div class="icon">
-                		<i class="fas fa-university"></i>
+
+    <body>
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <span class="admin-badge"><i class="fas fa-shield-alt me-2"></i>Administrator</span>
+                <h1 class="welcome-text">Welcome, <%out.print(session.getAttribute("adminid")); %>!</h1>
+                <p class="latin-subtitle">Imperium et Sapientia - Authority and Wisdom</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-icon">
+                        <i class="fas fa-university"></i>
                     </div>
-                    <h4>View Institute</h4>
-                    <button class="btn btn-dark"><a href="ViewInstitute.jsp"> Proceed </a></button>
-                    <p>Displays Institute details</p>
-                </div>     
-                <div class="card border-0">
-                    <div class="icon">
-                    	<i class="fas fa-user-graduate"></i>
+                    <h3 class="card-title">View Institutes</h3>
+                    <p class="card-description">Manage and oversee all registered institutions</p>
+                    <a href="ViewInstitute.jsp" class="card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Proceed
+                    </a>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h4>View Student</h4>
-                    <button class="btn btn-dark btn-sm"><a href="ViewAllStudent.jsp"> Proceed </a></button>
-                    <p>Displays Student details</p>
+                    <h3 class="card-title">View Students</h3>
+                    <p class="card-description">Access complete student records and information</p>
+                    <a href="ViewAllStudent.jsp" class="card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Proceed
+                    </a>
                 </div>
-                <div class="card border-0">
-                    <div class="icon">
-                        <i class="fas fa-comments"></i>
+
+                <div class="dashboard-card">
+                    <div class="card-icon">
+                        <i class="fas fa-comment-dots"></i>
                     </div>
-                    <h4>View Feedback</h4>
-                    <button class="btn btn-dark btn-sm"><a href="ViewAllFeedback.jsp"> Proceed </a></button>
-                    <p>Displays All Feedbacks</p>
+                    <h3 class="card-title">View Feedback</h3>
+                    <p class="card-description">Review student feedback and system improvements</p>
+                    <a href="ViewAllFeedback.jsp" class="card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Proceed
+                    </a>
                 </div>
-                <div class="card border-0">
-                    <div class="icon">
-                        <i class="fas fa-trash"></i>
+
+                <div class="dashboard-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trash-alt"></i>
                     </div>
-                    <h4>Delete Institute</h4>
-                    <button class="btn btn-dark btn-sm"><a href="DeleteInstitute.jsp"> Proceed </a></button>
-                    <p>Deletes Institute Details</p>
-                </div>
-                </div>
-                </div>
-                <div class="logout-button">
-                    <button class="btn btn-danger"><a href= "Logout.jsp">Log Out</a></button>
+                    <h3 class="card-title">Delete Institute</h3>
+                    <p class="card-description">Remove institutions from the system</p>
+                    <a href="DeleteInstitute.jsp" class="card-btn">
+                        <i class="fas fa-arrow-right me-2"></i>Proceed
+                    </a>
                 </div>
             </div>
-  </body>
-</html>
+
+            <div class="logout-section">
+                <a href="Logout.jsp" class="logout-btn">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+    </html>
