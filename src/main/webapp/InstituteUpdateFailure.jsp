@@ -16,7 +16,7 @@
 <%
 		out.println("<script>");
 		out.println("$(document).ready(function(){");
-		out.println("swal ( 'Meta Institute Says' ,  'Institute Update Unsuccessful!!' ,"
+		out.println("swal ( 'Academia Nexus Says' ,  'Institute Update Unsuccessful!!' ,"
 		        + "  'error' );");
 		out.println("});");
 		out.println("</script>");

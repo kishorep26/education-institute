@@ -17,7 +17,7 @@
 <%
 out.println("<script>");
 out.println("$(document).ready(function(){");
-out.println("swal ( 'Meta Institute Says' ,  'Your Response Has Not Been Recorded!!' ,"
+out.println("swal ( 'Academia Nexus Says' ,  'Your Response Has Not Been Recorded!!' ,"
         + "  'error' );");
 out.println("});");
 out.println("</script>");

@@ -20,7 +20,7 @@
 <%
 out.println("<script>");
 out.println("$(document).ready(function(){");
-out.println("swal ( 'Meta Institue Says' ,  'Request Submission Unsuccessful!!' ,"
+out.println("swal ( 'Academia Nexus Says' ,  'Request Submission Unsuccessful!!' ,"
         + "  'warning' );");
 out.println("});");
 out.println("</script>");

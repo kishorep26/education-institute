@@ -18,7 +18,7 @@
 <%
 out.println("<script>");
 out.println("$(document).ready(function(){");
-out.println("swal ( 'Meta Institute Says' ,  'You have been Accepted :D !!' ,"
+out.println("swal ( 'Academia Nexus Says' ,  'You have been Accepted :D !!' ,"
         + "  'success' );");
 out.println("});");
 out.println("</script>");

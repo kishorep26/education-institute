@@ -276,14 +276,14 @@
 									function successMessage()
 									{
 										$(document).ready(function(){
-										swal ( 'Meta Institute Says' ,  'Student Updated Successfully!!' ,  'success' );
+										swal ( 'Academia Nexus Says' ,  'Student Updated Successfully!!' ,  'success' );
 										});
 									}
 									
 									function failureMessage()
 									{
 										$(document).ready(function(){
-										swal ( 'Meta Institute Says' ,  'Student Update Unsuccessful!!' ,  'error' );
+										swal ( 'Academia Nexus Says' ,  'Student Update Unsuccessful!!' ,  'error' );
 										});
 									}
 									

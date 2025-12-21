@@ -41,7 +41,7 @@
 
 <script>
 $(document).ready(function(){
-swal ( 'Meta Institute Says' ,  'Please Enter Valid Credentials!!' ,'error');
+swal ( 'Academia Nexus Says' ,  'Please Enter Valid Credentials!!' ,'error');
 });
 </script>
 

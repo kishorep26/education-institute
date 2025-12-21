@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Meta Institution</title>
+<title>Academia Nexus</title>
 <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/6033/6033716.png" type="image/x-icon">
 </head>
 <body>

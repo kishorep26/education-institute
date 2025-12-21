@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Institute Registration - Meta University</title>
+        <title>Institute Registration - Academia Nexus</title>
         <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3976/3976625.png">
 
         <!-- Google Fonts -->
@@ -162,7 +162,7 @@
             <div class="registration-header">
                 <i class="fas fa-building fa-3x mb-3"></i>
                 <h1>Institute Registration</h1>
-                <p>Partner with Meta University to offer quality education</p>
+                <p>Partner with Academia Nexus to offer quality education</p>
             </div>
 
             <div class="registration-form">

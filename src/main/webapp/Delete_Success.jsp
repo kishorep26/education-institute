@@ -16,7 +16,7 @@
 <%
 out.println("<script>");
 out.println("$(document).ready(function(){");
-out.println("swal ( 'Meta Institute Says' ,  'Institute Deleted Successfully!!' ,"
+out.println("swal ( 'Academia Nexus Says' ,  'Institute Deleted Successfully!!' ,"
         + "  'success' );");
 out.println("});");
 out.println("</script>");

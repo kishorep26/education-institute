@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta University - Excellence in Education</title>
+    <title>Academia Nexus - Excellence in Education</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3976/3976625.png" type="image/x-icon">
 
     <!-- Google Fonts -->
@@ -424,7 +424,7 @@
         <a class="navbar-brand" href="#">
           <i class="fas fa-graduation-cap"></i>
           <div>
-            Meta University
+            Academia Nexus
             <div style="font-size: 0.6rem; opacity: 0.9; font-style: italic; font-weight: 400;">Lux et Veritas</div>
           </div>
         </a>
@@ -490,7 +490,7 @@
     <!-- Features Section -->
     <section class="features-section" id="features">
       <div class="container">
-        <h2 class="section-title">Why Choose Meta University?</h2>
+        <h2 class="section-title">Why Choose Academia Nexus?</h2>
         <p class="section-subtitle">Discover the advantages that set us apart in higher education</p>
 
         <div class="row g-4">
@@ -687,13 +687,13 @@
           <a href="https://www.linkedin.com/" class="social-icon" target="_blank">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="mailto:info@metauniversity.edu" class="social-icon">
+          <a href="mailto:info@academianexus.edu" class="social-icon">
             <i class="fas fa-envelope"></i>
           </a>
         </div>
 
         <div class="copyright">
-          <p>&copy; 2025 Meta University. All rights reserved. | Excellence in Education</p>
+          <p>&copy; 2025 Academia Nexus. All rights reserved. | Excellence in Education</p>
         </div>
       </div>
     </footer>

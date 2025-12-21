@@ -16,7 +16,7 @@
 <%
 		out.println("<script>");
 		out.println("$(document).ready(function(){");
-		out.println("swal ( 'Meta Institute Says' ,  'Feedback Submission Unsuccessful!!' ,"
+		out.println("swal ( 'Academia Nexus Says' ,  'Feedback Submission Unsuccessful!!' ,"
 		        + "  'success' );");
 		out.println("});");
 		out.println("</script>");
