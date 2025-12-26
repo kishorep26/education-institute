@@ -1,98 +1,36 @@
 # Training Institute Management System
 
-A Java web application for managing training institutes, students, courses, faculty, and admissions.
+## Overview
+A comprehensive Java-based web application for managing training institutes, students, courses, faculty, and admissions. This enterprise-grade system provides a complete solution for educational institutions to streamline operations, track student progress, manage course offerings, and handle administrative tasks efficiently.
 
-## 🚀 Live Demo
+## Key Features
+- Student enrollment and profile management
+- Course catalog and schedule administration
+- Faculty assignment and resource allocation
+- Admission process workflow and tracking
+- Grade and performance management system
+- Attendance tracking and reporting
+- Administrative dashboard for institute operations
+- Database-driven architecture with SQL persistence
+- Docker containerization for easy deployment
+- Responsive web interface for desktop and mobile
 
-**URL:** https://meta-app-0kr2.onrender.com
+## Technology Stack
+- Backend: Java, Spring Framework
+- Frontend: JavaScript, HTML, CSS
+- Build Tool: Maven (pom.xml)
+- Database: SQL (database.sql schema)
+- Containerization: Docker, Dockerfile
+- Architecture: Model-View-Controller (MVC)
 
-## 🛠️ Technology Stack
+## Getting Started
+1. Install Java JDK and Maven
+2. Clone the repository and navigate to project directory
+3. Set up database: Import database.sql schema
+4. Configure database connection in application properties
+5. Build the project: mvn clean install
+6. Run the application: mvn spring-boot:run or java -jar target/education-institute.jar
+7. Access the system at http://localhost:8080
 
-- **Backend:** Java 11, JSP, Servlets
-- **Database:** TiDB Cloud (MySQL compatible)
-- **Build Tool:** Maven
-- **Server:** Apache Tomcat 9.0
-- **Deployment:** Render (Docker)
-- **Logging:** SLF4J with Logback
-
-## 📁 Project Structure
-
-```
-TrainingInstitute/
-├── src/
-│   ├── main/
-│   │   ├── java/com/nttdatacasestudy/
-│   │   │   ├── connection/      # Database connection
-│   │   │   ├── dao/             # Data Access Object interfaces
-│   │   │   ├── daoimpl/         # DAO implementations
-│   │   │   ├── dto/             # Data Transfer Objects
-│   │   │   ├── exceptions/      # Custom exceptions
-│   │   │   └── mapper/          # ResultSet mappers
-│   │   ├── resources/           # Configuration files
-│   │   └── webapp/              # JSP pages, CSS, JS
-│   └── test/                    # Test files
-├── Dockerfile                   # Docker configuration
-├── pom.xml                      # Maven dependencies
-└── database.sql                 # Complete database schema & data
-```
-
-## ✨ Features
-
-### Admin Module
-- ✅ Login/Logout
-- ✅ View all institutes
-- ✅ View all students
-- ✅ Manage courses
-- ✅ Manage faculty
-- ✅ View admission requests
-- ✅ View feedback
-
-### Student Module
-- ✅ Registration
-- ✅ Login/Logout
-- ✅ View profile
-- ✅ Browse courses
-- ✅ Submit admission requests
-- ✅ Submit feedback
-- ✅ View admission status
-
-### Institute Module
-- ✅ Login/Logout
-- ✅ View profile
-- ✅ Manage courses
-- ✅ Manage faculty
-- ✅ View admission requests
-- ✅ Approve/Reject admissions
-- ✅ View feedback
-
-## 📊 Database Schema
-
-The application uses 7 tables:
-- `admin` - Admin credentials
-- `institute` - Training institutes
-- `student` - Student information
-- `course` - Courses offered
-- `faculty` - Faculty members
-- `admissionrequest` - Student admission requests
-- `feedback` - Student feedback
-
-See `database.sql` for complete schema.
-
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `DB_URL` | Database connection URL | `mysql://user:pass@host:port/db` |
-| `DB_USER` | Database username | `root` |
-| `DB_PASS` | Database password | `password123` |
-
-### Application Properties
-
-Located in `src/main/resources/logback.xml`:
-- Log level configuration
-- Log file location
-- Console output settings
-
-Built as part of NTT Data case study project.
+## Deployment
+Dockerized application ready for deployment on cloud platforms. Compatible with AWS Elastic Beanstalk, Google Cloud Platform, Azure App Service, or any container orchestration system.
